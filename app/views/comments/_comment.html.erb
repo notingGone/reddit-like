@@ -1,5 +1,7 @@
-<div class="border-start p-4 mb-4">
-  <%= comment.user.name %> posted
+<div class="border-start p-4 mb-4 mt-2">
+  <span class="small">
+    <%= link_to comment.user.first_name, user_path(comment.user) %> posted
+  </span>
   <%= simple_format comment.body %>
 
   <div data-controller="reply">

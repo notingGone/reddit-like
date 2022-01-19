@@ -15,6 +15,10 @@
   <dd><%= @post.body %></dd>
 </dl>
 
-<h3>Comments</h3>
-<%= render partial: "comments/form", locals: { commentable: @post } %>
+<div data-controller="reply">
+  <%= link_to "Reply", "#", data: { action: "click->reply#toggle" } %>
+  <%= render partial: "comments/form", locals: { commentable: @post , class: "d-none", target: "reply.form" } %>
+</div>
+
+<h3 class="border-top">Comments</h3>
 <%= render @post.comments.where(parent_id: nil) %>
