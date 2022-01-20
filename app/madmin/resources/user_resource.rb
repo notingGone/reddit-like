@@ -15,7 +15,7 @@ class UserResource < Madmin::Resource
   attribute :avatar, index: false
 
   # Associations
-  attribute :notifications
+  # attribute :notifications
   attribute :services
 
   # Uncomment this to customize the display name of records in the admin area.
