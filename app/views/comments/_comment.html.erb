@@ -5,7 +5,8 @@
   <%= simple_format comment.body %>
 
   <div data-controller="reply">
-    <%= link_to "Reply", "#", data: { action: "click->reply#toggle" } %>
+    <%= link_to "Reply", "#", class: "small", data: { action: "click->reply#toggle" } %> |
+    <%= link_to "Destroy", post_comment_path(comment.commentable, comment), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
     <%= render partial: "comments/form", locals: { commentable: comment.commentable, parent_id: comment.id, class: "d-none", target: "reply.form" } %>
   </div>
 
