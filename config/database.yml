@@ -81,8 +81,8 @@ test:
 #
 production:
   <<: *default
-  database: postgresql-vertical-80917
+  # database: postgresql-vertical-80917
   url: <%= ENV["DATABASE_URL"] %>
-  # database: template_test_production
+  database: template_test_production
   username: olxhcvkyczizkj
   password: <%= ENV["TEMPLATE_TEST_DATABASE_PASSWORD"] %>
