@@ -1,24 +1,31 @@
-<div class="page-header">
-  <%= link_to posts_path, class: 'btn btn-default' do %>
-    All Posts
-  <% end %>
-  <%= link_to edit_post_path(@post), class: 'btn btn-primary' do %>
-    Edit
-  <% end %>
-  <h1>Show post</h1>
+<div class="row page-header">
+  <div class="col-md-3">
+    <div class="btn-group" role="group" aria-label="Basic example">
+      <%= link_to posts_path, class: 'btn btn-sm btn-secondary' do %>
+        All Posts
+      <% end %>
+      <% if @post.user == current_user %>
+        <%= link_to edit_post_path(@post), class: 'btn btn-sm btn-primary' do %>
+          Edit
+        <% end %>
+      <% end %>
+    </div>
+  </div>
 </div>
 
-<dl class="dl-horizontal">
-  <dt>Title:</dt>
-  <dd><%= @post.title %></dd>
-  <dt>Body:</dt>
-  <dd><%= @post.body %></dd>
-</dl>
-
-<div data-controller="reply">
-  <%= link_to "Reply", "#", data: { action: "click->reply#toggle" } %>
-  <%= render partial: "comments/form", locals: { commentable: @post , class: "d-none", target: "reply.form" } %>
+<div class="card m-2">
+  <div class="card-body">
+    <h1 class="card-title"><%= @post.title %></h1>
+    <div class="card-subtitle small mb-2 text-muted">By <%= link_to @post.user.first_name, @post.user %></div>
+    <div class="card-text mb-2"><%= @post.body %></div>
+    <div data-controller="reply">
+      <%= link_to "Reply", "#", class: "card-link", data: { action: "click->reply#toggle" } %>
+      <%= render partial: "comments/form", locals: { commentable: @post , class: "d-none", target: "reply.form" } %>
+    </div>
+  </div>
 </div>
 
-<h3 class="border-top">Comments</h3>
-<%= render @post.comments.where(parent_id: nil) %>
+<section id="comments" class="m-2">
+  <h3>Comments</h3>
+  <%= render @post.comments.where(parent_id: nil) %>
+</section>
